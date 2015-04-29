@@ -1,0 +1,11 @@
+.opacity .any-single {
+  test: ok;
+}
+
+.opacity .any-single .any-single2 {
+  test: ok;
+}
+
+.opacity .any-single, .opacity .any-single2 {
+  test: ok;
+}

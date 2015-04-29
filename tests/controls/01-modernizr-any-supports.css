@@ -1,0 +1,11 @@
+.opacity .modernizr-any-supports, .csstransforms .modernizr-any-supports {
+  test: ok;
+}
+
+.opacity .modernizr-any-supports .modernizr-any-supports2, .csstransforms .modernizr-any-supports .modernizr-any-supports2 {
+  test: ok;
+}
+
+.opacity .modernizr-any-supports, .opacity .modernizr-any-supports2, .csstransforms .modernizr-any-supports, .csstransforms .modernizr-any-supports2 {
+  test: ok;
+}

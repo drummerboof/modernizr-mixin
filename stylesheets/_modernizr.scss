@@ -10,7 +10,7 @@
 /// @param {Bool}      $supports   - Whether to check for supported features or not
 /// @param {ArgList}   $features   - List of features
 
-@mixin _modernizr($supports, $features...) {
+@mixin _modernizr($any, $supports, $features...) {
 
   // Use the 'no-' prefix if checking for unsuported features (e.g. `.no-translate3d`)
   $prefix: if($supports, '', 'no-');
@@ -41,9 +41,17 @@
       // Append the new selector
       // a) to the string if yep (e.g. `.translate3d.opacity`)
       // b) to the list if nope (e.g. `.no-translate3d, .no-opacity`)
-      $selector: if($supports, $selector + $new-selector, append($selector, $new-selector, 'comma'));
+      $selector: if($supports and not $any, $selector + $new-selector, append($selector, $new-selector, 'comma'));
 
     }
+  }
+
+  @if $supports and $any {
+    $trimmed-selector: ();
+    @for $i from 2 through length($selector) {
+      $trimmed-selector: append($trimmed-selector, nth($selector, $i), 'comma');
+    }
+    $selector: $trimmed-selector;
   }
 
   // Generate selector nesting features classes and the parent selector
@@ -71,7 +79,7 @@
 /// }
 
 @mixin yep($features...) {
-  @include _modernizr(true, $features...) {
+  @include _modernizr(false, true, $features...) {
     @content;
   }
 }
@@ -91,7 +99,28 @@
 /// }
 
 @mixin nope($features...) {
-  @include _modernizr(false, $features...) {
+  @include _modernizr(false, false, $features...) {
     @content;
   }
 }
+
+
+// -----------------------------------------------------------------------------
+// Any mixin
+// -----------------------------------------------------------------------------
+/// Prints classes for supported features comma separated
+/// @access public
+/// @param {ArgList} $features - List of features
+/// @example scss
+/// .my-selector {
+///   @include any(opacity, csstransforms) {
+///     // ...
+///   }
+/// }
+
+@mixin any($features...) {
+    @include _modernizr(true, true, $features...) {
+        @content;
+    }
+}
+

@@ -1,0 +1,11 @@
+.opacity .any-multi, .csstransforms .any-multi {
+  test: ok;
+}
+
+.opacity .any-multi .any-multi2, .csstransforms .any-multi .any-multi2 {
+  test: ok;
+}
+
+.opacity .any-multi, .opacity .any-multi2, .csstransforms .any-multi, .csstransforms .any-multi2 {
+  test: ok;
+}

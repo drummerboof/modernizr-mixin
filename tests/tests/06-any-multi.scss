@@ -1,0 +1,25 @@
+@import '../../stylesheets/_modernizr';
+
+// Simple
+.any-multi {
+    @include any(opacity, csstransforms) {
+        test: ok;
+    }
+}
+
+// Nested
+.any-multi {
+    .any-multi2 {
+        @include any(opacity, csstransforms) {
+            test: ok;
+        }
+    }
+}
+
+// Multiple
+.any-multi,
+.any-multi2 {
+    @include any(opacity, csstransforms) {
+        test: ok;
+    }
+}
