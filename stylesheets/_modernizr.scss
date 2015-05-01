@@ -7,6 +7,7 @@
 // -----------------------------------------------------------------------------
 /// Prints classes for supported or unsupported features
 /// @access private
+/// @param {Bool}      $any        - Whether use a comma or concatenation when building the selector
 /// @param {Bool}      $supports   - Whether to check for supported features or not
 /// @param {ArgList}   $features   - List of features
 
@@ -18,7 +19,7 @@
   // Features selector
   // a) create a string if checking for supported features. We'll concatenate class names later on (e.g. `.translate3d.opacity selector`)
   // b) create a list if checking for unsuported features. We'll append the class names later on (e.g. `.no-js selector, .no-translate3d selector`)
-  $selector: if($supports, '', unquote('.no-js'));
+  $selector: if(not $supports, unquote('.no-js'), '');
 
   // Make sure the mixin has been called within a selector
   @if not & {
@@ -41,11 +42,12 @@
       // Append the new selector
       // a) to the string if yep (e.g. `.translate3d.opacity`)
       // b) to the list if nope (e.g. `.no-translate3d, .no-opacity`)
-      $selector: if($supports and not $any, $selector + $new-selector, append($selector, $new-selector, 'comma'));
+      $selector: if($any or $selector == '.no-js', append($selector, $new-selector, 'comma'), $selector + $new-selector);
 
     }
   }
 
+  // If we are not adding no-js and want an any selector (,) ignore the first empty selector
   @if $supports and $any {
     $trimmed-selector: ();
     @for $i from 2 through length($selector) {
@@ -99,7 +101,7 @@
 /// }
 
 @mixin nope($features...) {
-  @include _modernizr(false, false, $features...) {
+  @include _modernizr(true, false, $features...) {
     @content;
   }
 }
@@ -120,6 +122,26 @@
 
 @mixin any($features...) {
     @include _modernizr(true, true, $features...) {
+        @content;
+    }
+}
+
+
+// -----------------------------------------------------------------------------
+// Neither mixin
+// -----------------------------------------------------------------------------
+/// Prints classes for unsupported features concatenated and lack of JS
+/// @access public
+/// @param {ArgList} $features - List of features
+/// @example scss
+/// .my-selector {
+///   @include neither(opacity, csstransforms) {
+///     // ...
+///   }
+/// }
+
+@mixin neither($features...) {
+    @include _modernizr(false, false, $features...) {
         @content;
     }
 }

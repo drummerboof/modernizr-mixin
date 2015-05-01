@@ -1,0 +1,11 @@
+.no-js .neither-single, .no-opacity .neither-single {
+  test: ok;
+}
+
+.no-js .neither-single .neither-single2, .no-opacity .neither-single .neither-single2 {
+  test: ok;
+}
+
+.no-js .neither-single, .no-js .neither-single2, .no-opacity .neither-single, .no-opacity .neither-single2 {
+  test: ok;
+}

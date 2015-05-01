@@ -1,0 +1,25 @@
+@import '../../stylesheets/_modernizr';
+
+// Simple
+.neither-multi {
+    @include neither(opacity, csstransforms) {
+        test: ok;
+    }
+}
+
+// Nested
+.neither-multi {
+    .neither-multi2 {
+        @include neither(opacity, csstransforms) {
+            test: ok;
+        }
+    }
+}
+
+// Multiple
+.neither-multi,
+.neither-multi2 {
+    @include neither(opacity, csstransforms) {
+        test: ok;
+    }
+}

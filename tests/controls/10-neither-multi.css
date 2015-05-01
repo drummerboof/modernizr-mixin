@@ -1,0 +1,11 @@
+.no-js .neither-multi, .no-opacity.no-csstransforms .neither-multi {
+  test: ok;
+}
+
+.no-js .neither-multi .neither-multi2, .no-opacity.no-csstransforms .neither-multi .neither-multi2 {
+  test: ok;
+}
+
+.no-js .neither-multi, .no-js .neither-multi2, .no-opacity.no-csstransforms .neither-multi, .no-opacity.no-csstransforms .neither-multi2 {
+  test: ok;
+}

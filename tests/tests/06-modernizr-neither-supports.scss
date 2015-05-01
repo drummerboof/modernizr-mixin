@@ -1,7 +1,7 @@
 @import '../../stylesheets/_modernizr';
 
 // Simple
-.modernizr-multi-supports-false {
+.modernizr-multi-supports {
     $features: (opacity, csstransforms);
     @include _modernizr(false, false, $features...) {
         test: ok;
@@ -9,8 +9,8 @@
 }
 
 // Nested
-.modernizr-multi-supports-false {
-    .modernizr-multi-supports-false2 {
+.modernizr-multi-supports {
+    .modernizr-multi-supports2 {
         $features: (opacity, csstransforms);
         @include _modernizr(false, false, $features...) {
             test: ok;
@@ -18,9 +18,9 @@
     }
 }
 
-// Multiple
-.modernizr-multi-supports-false,
-.modernizr-multi-supports-false2 {
+// Simple
+.modernizr-multi-supports,
+.modernizr-multi-supports2 {
     $features: (opacity, csstransforms);
     @include _modernizr(false, false, $features...) {
         test: ok;

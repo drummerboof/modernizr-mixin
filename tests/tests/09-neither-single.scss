@@ -1,0 +1,25 @@
+@import '../../stylesheets/_modernizr';
+
+// Simple
+.neither-single {
+    @include neither(opacity) {
+        test: ok;
+    }
+}
+
+// Nested
+.neither-single {
+    .neither-single2 {
+        @include neither(opacity) {
+            test: ok;
+        }
+    }
+}
+
+// Multiple
+.neither-single,
+.neither-single2 {
+    @include neither(opacity) {
+        test: ok;
+    }
+}
